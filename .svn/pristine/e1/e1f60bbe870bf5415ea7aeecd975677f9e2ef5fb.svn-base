@@ -1,0 +1,23 @@
+<request>
+	<system>
+		<unique_key>{$request.SYSTEM_UNIQUE_KEY}</unique_key>
+		<site_url>{$request.SYSTEM_SITE_URL}</site_url>
+		<site_name>{$request.SYSTEM_SITE_NAME}</site_name>
+		<sugar_version>{$request.SYSTEM_SUGAR_VERSION}</sugar_version>
+		<ts_version>{$request.TS_VERSION}</ts_version>
+	</system>
+	<user>
+		<name>{$request.USER_NAME}</name>
+	</user>
+	<case>
+		<id>{$request.ID}</id>
+		<datetime>{$request.DATETIME}</datetime>
+		<ticket_number>{$request.TICKET_NUMBER}</ticket_number>
+		<action>{$request.ACTION}</action>
+		<priority>{$request.PRIORITY}</priority>
+		<status>{$request.STATUS}</status>
+		<type>{$request.TYPE}</type>
+		<name>{$request.NAME}</name>
+		<content><![CDATA[{$request.CONTENT}]]></content>
+	</case>
+</request>

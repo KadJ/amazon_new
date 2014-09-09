@@ -1,0 +1,31 @@
+<?php
+/**
+ * Created by ООО "Лемарс"
+ * User: Evgen
+ * Date: 25.02.12
+ * Time: 16:48
+ * Отправка запроса о утверждении стоимости оплаты на сайт разработчика
+ */
+
+if(!empty($this->bean->id)) {
+	$this->bean->cost_approval = '1';
+	$this->bean->save();
+	$this->bean->retrieve($this->bean->id);
+	// Оптавляем запрос
+	$result = $this->bean->sendRequest("setCostApproval", $this->bean->cost_approval ? true : false);
+
+	if(!$this->bean->repayment_terms_approval) {
+		// Если тип оплаты еще не подтвержден
+		// автоматически его подтверждаем
+		$this->bean->repayment_terms_approval = 1;
+		$this->bean->save();
+		$this->bean->retrieve($this->bean->id);
+		$result = $this->bean->sendRequest("setRepaymentTermsApproval", $this->bean->repayment_terms_approval ? true : false);
+	}
+
+	// Отправляем обратно на карточку обращения в тех.поддержку
+	$url = "index.php?module=lm_TechnicalSupport&action=DetailView&record=" . $this->bean->id;
+	header("Location: " . $url);
+	exit;
+}
+
